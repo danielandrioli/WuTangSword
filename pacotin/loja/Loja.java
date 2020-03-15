@@ -1,4 +1,6 @@
-package pacotin;
+package pacotin.loja;
+import pacotin.Personagem;
+import pacotin.VerificacaoDeInput;
 import pacotin.escudos.*;
 import pacotin.espadas.*;
 
@@ -7,11 +9,15 @@ public class Loja {
     private final Personagem personagem;
     private final Escudo listaEscudosLoja[]; // =  ListaEscudos.acessarLista();
     private final Espada listaEspadasLoja[]; // = ListaEspadas.acessarLista(); SE DER ERRO, FAZER ASSIM
+    private final LojaCompras secaoCompras;
+    private final LojaVendas secaoVendas;
     
     private Loja(Personagem p1){
         this.listaEscudosLoja =  ListaEscudos.acessarLista();
         this.listaEspadasLoja = ListaEspadas.acessarLista();
         personagem = p1;
+        secaoCompras = LojaCompras.getCompras(personagem, listaEscudosLoja, listaEspadasLoja);
+        secaoVendas = LojaVendas.getVendas(personagem, listaEscudosLoja, listaEspadasLoja);
     }
     
     public static Loja getLoja(Personagem personagem){
@@ -28,11 +34,13 @@ public class Loja {
             System.out.println("[1] Comprar - [2] Vender - [3] Sair da loja.");
             opcao = VerificacaoDeInput.verificarEntreLimites(1, 3);
             switch(opcao){
-                case 1: 
-                    comprar();
+                case 1:
+                    secaoCompras.comprar();
+                    //comprar();
                     break;
                 case 2:
-                    vender();
+                    secaoVendas.vender();
+                    //vender();
                     break;
                 case 3:
                     System.out.println("Até logo!");
@@ -40,12 +48,13 @@ public class Loja {
             }
         }while(opcao != 3);
     }
-    
+ /*   
     private void comprar(){
         int opcao;
         do{
-            System.out.println("\nMenu de compras: [1] Escudos - [2] Espadas - [3] Voltar."); //adicionar poderes!
-            opcao = VerificacaoDeInput.verificarEntreLimites(1, 3);
+            System.out.println("\nMenu de compras: [1] Escudos - [2] Espadas - [3] Poções de vida - "
+                    + "[4] Super-poderes - [5] Voltar."); 
+            opcao = VerificacaoDeInput.verificarEntreLimites(1, 5);
             switch(opcao){
                 case 1:
                     comprarEscudos();
@@ -54,6 +63,11 @@ public class Loja {
                     comprarEspadas();
                     break;
                 case 3:
+                    comprarPocoesVida();
+                    break;
+                case 4:
+                    break;
+                case 5:
                     break;
             }
         }while(opcao != 3);
@@ -110,7 +124,21 @@ public class Loja {
         }
     }
     
-    private void vender(){
+    private void comprarPocoesVida(){
+        int opcao;
+        System.out.println("Quantas poções mágicas você gostaria de comprar?");
+        opcao = VerificacaoDeInput.verificarValorInteiroPositivo();
+        if(opcao == 0){
+            System.out.println("Humm... Nenhuma, então...");
+        } else if(personagem.getInventario().getDinheiro() >= (opcao * pocaoVida.getPreco())){
+            personagem.getInventario().getPocoes().comprar(opcao);
+        } else{
+            System.out.println("Você não tem dinheiro suficiente!");
+        }
+            
+    }
+*/    
+/*    private void vender(){
         int opcao;
         do{
             System.out.println("\nMenu de vendas: [1] Escudos - [2] Espadas - [3] Voltar.");
@@ -172,4 +200,5 @@ public class Loja {
             }
         }
     }
+*/
 }

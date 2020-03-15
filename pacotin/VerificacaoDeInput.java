@@ -42,4 +42,21 @@ public final class VerificacaoDeInput {
         }while(resposta != 's' && resposta != 'S' && resposta != 'n' && resposta != 'N');
         return resposta;
     }
+    
+    public static int verificarValorInteiroPositivo(){
+        int valor;
+        do{
+            try{
+               valor = teclado.nextInt();
+               if(valor < 0){
+                   System.out.println("Opção inválida!");
+               }
+            }catch(InputMismatchException erro){
+                System.out.println("Dígito inválido! Responda novamente: ");
+                teclado.next(); //Linha necessária para evitar um bug em loop
+                valor = -1;
+            }
+        }while(valor < 0);
+        return valor;
+    }
 }

@@ -2,10 +2,12 @@ package pacotin;
 
 import pacotin.escudos.*;
 import pacotin.espadas.*;
+import pacotin.loja.PocaoVida;
 
 public class Inventario {
     private Escudo escudo;
     private Espada espada;
+    private PocaoVida pocaoVida;
     private int dinheiro;
     private static Inventario inventario;
     
@@ -41,6 +43,14 @@ public class Inventario {
     
     public Espada getEspada(){
         return espada;
+    }
+    
+    public PocaoVida getPocoes(){
+        return pocaoVida;
+    }
+    
+    public void setPocao(PocaoVida pocao){
+        pocaoVida = pocao;
     }
     
     public void trocarEscudo(Escudo novoEscudo){

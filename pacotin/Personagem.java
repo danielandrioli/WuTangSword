@@ -47,7 +47,8 @@ public class Personagem {
         System.out.println("Nome: " + nome + " - " + vida + "/" + vidaTotal);
         System.out.println("Habilidade com espadas: " + habilidade + "\nNível de experiencia: " + nivel);
         System.out.println("Espada: " + (inventario.getEspada() != null?inventario.getEspada().getNome():"nenhuma."));
-        System.out.println("Escudo: " + (inventario.getEscudo() != null?inventario.getEscudo().getNome():"nenhum."));
+        System.out.println("Escudo: " + (inventario.getEscudo() != null?inventario.getEscudo().getNome():"nenhum."
+                + "\nPoções de vida: " + inventario.getPocoes().getQuantidade()));
     }
     
     public String getNome(){
@@ -63,9 +64,12 @@ public class Personagem {
     }
     
     public void curaVida(int cura){
-        vida += cura;
-        if(vida > vidaTotal){
+        if(vida + cura > vidaTotal){
+            System.out.println("Você recuperou " + (vidaTotal - vida) + " pontos de vida!");
             vida = vidaTotal;
+        }else{
+            System.out.println("Você recuperou " + cura + " pontos de vida!");
+            vida += cura;
         }
     }
     
@@ -82,9 +86,11 @@ public class Personagem {
     }
     
     public int atacar(){
-        evoluiHabilidade(); //A cada ataque evolui um pouco de habilidade
-        return (inventario.getEspada().getAtaque() * ((int) (Math.random()* 5)))  
+        int ataque;
+        ataque = (inventario.getEspada().getAtaque() * ((int) (Math.random()* 5)))  
                 + ((int)(Math.random() * 6) * this.habilidade);
+        evoluiHabilidade(); //A cada ataque evolui um pouco de habilidade
+        return ataque;
     }
     
     private void evoluiHabilidade(){

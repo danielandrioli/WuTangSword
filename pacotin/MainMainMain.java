@@ -1,4 +1,5 @@
 package pacotin;
+import pacotin.loja.Loja;
 import java.util.Scanner;
 
 public class MainMainMain {
