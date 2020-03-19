@@ -15,6 +15,7 @@ public class Inventario {
         this.escudo = new EscudoMadeira(); //Escudo inicial
         this.espada = new EspadaMadeira(); //Espada inicial
         this.dinheiro = 100;
+        pocaoVida = new PocaoVida();
     }
     
     public static Inventario getInventario(){
@@ -45,7 +46,7 @@ public class Inventario {
         return espada;
     }
     
-    public PocaoVida getPocoes(){
+    public PocaoVida getPocoesVida(){
         return pocaoVida;
     }
     

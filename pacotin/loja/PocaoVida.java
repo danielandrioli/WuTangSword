@@ -1,5 +1,4 @@
 package pacotin.loja;
-
 import pacotin.Personagem;
 
 public class PocaoVida {

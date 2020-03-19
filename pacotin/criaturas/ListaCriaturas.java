@@ -8,7 +8,7 @@ public class ListaCriaturas {//Vou fazer essa lista de uma maneira diferente das
     
     private ListaCriaturas(){
         lista = new ArrayList<>();
-        lista.add(new Rato());
+        lista.add(new Rato()); //Fica com índice 0?
         lista.add(new Troll());
         lista.add(new Orc());
         lista.add(new Dwarf());
@@ -17,12 +17,12 @@ public class ListaCriaturas {//Vou fazer essa lista de uma maneira diferente das
         lista.add(new GadoFurioso());
     }
     
-    public ListaCriaturas getLista(){
+    public static List getLista(){
         if(listaCriaturas == null){
             listaCriaturas = new ListaCriaturas();
-            return listaCriaturas;
+            return lista;
         }else{
-            return listaCriaturas;
+            return lista;
         }
     }
 }

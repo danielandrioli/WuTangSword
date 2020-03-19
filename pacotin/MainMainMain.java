@@ -1,6 +1,7 @@
 package pacotin;
 import pacotin.loja.Loja;
 import java.util.Scanner;
+import pacotin.floresta.Floresta;
 
 public class MainMainMain {
     static Scanner teclado = new Scanner(System.in);
@@ -12,6 +13,7 @@ public class MainMainMain {
         nome = teclado.nextLine();
         Personagem personagem = Personagem.getPersonagem(nome);
         Loja loja = Loja.getLoja(personagem);
+        Floresta floresta = Floresta.getFloresta(personagem);
         
         do{
         System.out.println("\nMENU:\n[1] Ir para a floresta;\n[2] Acessar a loja;\n[3] Verificar status;"
@@ -19,6 +21,7 @@ public class MainMainMain {
            opcao = VerificacaoDeInput.verificarEntreLimites(1, 4); 
            switch(opcao){
                case 1:
+                   floresta.entrar();
                    break;
                case 2:
                    loja.acessarLoja();

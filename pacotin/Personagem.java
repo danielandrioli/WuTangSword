@@ -1,9 +1,9 @@
 package pacotin;
 public class Personagem {
     private final String nome;
-    private int habilidade;
-    private int evolucaoHabilidade;
-    private int nivel;
+    private int habilidade; //Habilidade com espadas
+    private int evolucaoHabilidade; //Conforme o personagem bate em criaturas, evolui um pouco. Quando chega a X, evolui a habilidade
+    private int nivel; //Nível do personagem
     private int vida;
     private int vidaTotal;
     private int criaturasMortas;
@@ -28,7 +28,7 @@ public class Personagem {
         return perso;
     }
     
-    private void verificaSubidaNivel(){
+    private void verificaSubidaNivel(){ //MEXENDO AQUI
         if(criaturasMortas == 2 * nivel){
             criaturasMortas = 0;
             nivel++;
@@ -37,8 +37,10 @@ public class Personagem {
             System.out.println("Parabéns! Você subiu para o nível " + nivel);
         }
     }
-    
-    public void matouCriatura(){ //Sempre apos matar uma criatura
+                    
+    public void matouCriatura(int lootGold){ //Sempre apos matar uma criatura
+        System.out.println("Loot: " + lootGold + " moedas de ouro.");
+        inventario.ganharDinheiro(lootGold);
         criaturasMortas++;
         verificaSubidaNivel();
     }
@@ -48,7 +50,7 @@ public class Personagem {
         System.out.println("Habilidade com espadas: " + habilidade + "\nNível de experiencia: " + nivel);
         System.out.println("Espada: " + (inventario.getEspada() != null?inventario.getEspada().getNome():"nenhuma."));
         System.out.println("Escudo: " + (inventario.getEscudo() != null?inventario.getEscudo().getNome():"nenhum."
-                + "\nPoções de vida: " + inventario.getPocoes().getQuantidade()));
+                + "\nPoções de vida: " + inventario.getPocoesVida().getQuantidade()));
     }
     
     public String getNome(){
@@ -61,6 +63,10 @@ public class Personagem {
     
     public int getVidaTotal(){
         return vidaTotal;
+    }
+    
+    public int getNivel(){
+        return nivel;
     }
     
     public void curaVida(int cura){
@@ -87,10 +93,16 @@ public class Personagem {
     
     public int atacar(){
         int ataque;
-        ataque = (inventario.getEspada().getAtaque() * ((int) (Math.random()* 5)))  
-                + ((int)(Math.random() * 6) * this.habilidade);
+        ataque = (inventario.getEspada().getAtaque() * ((int) (Math.random()* 2)))  
+                + ((int)(Math.random() * 3) * this.habilidade);
         evoluiHabilidade(); //A cada ataque evolui um pouco de habilidade
         return ataque;
+    }
+    
+    public int defender(){
+        int defesa;
+        defesa = (int)((float)(inventario.getEscudo().getDefesa()) * ((float)Math.random() + 0.5));
+        return defesa;
     }
     
     private void evoluiHabilidade(){

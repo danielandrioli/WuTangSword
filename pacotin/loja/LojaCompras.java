@@ -112,7 +112,7 @@ public class LojaCompras {
         if(opcao == 0){
             System.out.println("Humm... Nenhuma, então...");
         } else if(personagem.getInventario().getDinheiro() >= (opcao * pocaoVida.getPreco())){
-            personagem.getInventario().getPocoes().comprar(opcao);
+            personagem.getInventario().getPocoesVida().comprar(opcao);
             personagem.getInventario().gastarDinheiro(opcao * pocaoVida.getPreco());
             System.out.println(opcao + " poções compradas! Seu dinheiro atual: " + personagem.getInventario().getDinheiro());
         } else{

@@ -7,7 +7,6 @@ public abstract class Criatura {
     private final int poder;
     private final String grunhidos[] = new String[3]; //Cada criatura tem 3 grunhidos
     private int lootGold; 
-    private final int experiencia;
     private final int numCriatura; //USAR??
     
     public Criatura(String nome,int vidaTotal,int poder,int numCriatura, String g1, String g2, String g3){
@@ -19,7 +18,7 @@ public abstract class Criatura {
         this.grunhidos[0] = g1;
         this.grunhidos[1] = g2;
         this.grunhidos[2] = g3;
-        this.experiencia = 4 * this.poder; //VERIFICAR SE ESSA FORMULA É OK...
+        //this.experiencia = 4 * this.poder; //VERIFICAR SE ESSA FORMULA É OK...
     }
     
     public int atacar(){
@@ -43,22 +42,22 @@ public abstract class Criatura {
     }
     
     public int darLoot(){
-        return (int)(this.poder * (float)Math.random()); //VERIFICAR SE ESSA FORMULA É OK...
-    }
-    
-    public int getExp(){
-        return experiencia;
+        return (int)(this.poder * (float)Math.random() * 8); //VERIFICAR SE ESSA FORMULA É OK...
     }
     
     public final String getGrunhidos() {
         float rando;
         rando = (float) (10 * Math.random());
-        if(rando <=4){
+        if(rando <=3){
             return grunhidos[0];
-        } else if(rando <= 8){
+        } else if(rando <= 7){
             return grunhidos[1];
         }else{
             return grunhidos[2];
         }
+    }
+    
+    public void healPreBatalha(){
+        this.vida = this.vidaTotal;
     }
 }
